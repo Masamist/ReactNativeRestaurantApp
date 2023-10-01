@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { withNavigation } from 'react-navigation'
+import { useNavigation } from '@react-navigation/native'
 import ResultsDetail from './ResultsDetail'
 
-const ResultsList = ({ title, results, navigation }) => {
+const ResultsList = ({ title, results }) => {
+  const navigation = useNavigation()
   if(!results.length){
     return null
   }
@@ -17,7 +18,10 @@ const ResultsList = ({ title, results, navigation }) => {
         kayExtractor={(result) => result.id}
         renderItem={({item}) => {
           return (
-            <TouchableOpacity onPress={() => navigation.navigate('ResultsShow', {id: item.id})}>
+            <TouchableOpacity 
+              onPress={() => 
+                navigation.navigate("ResultsShow", {id: item.id })
+            }>
               <ResultsDetail result={item} />
             </TouchableOpacity>
           )
